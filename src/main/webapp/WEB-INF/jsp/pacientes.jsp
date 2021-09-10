@@ -12,7 +12,7 @@
 </head>
 <body>
  <div style="text-align:center">
-        <h1>Books Management</h1>
+        <h1>Gerenciamento do Paciente</h1>
         <h2>
             <a href="/novo">Adicionar novo Paciente</a>
             &nbsp;&nbsp;&nbsp;
@@ -21,35 +21,7 @@
         </h2>
     </div>
 
-<form method="post" action="<c:url value="/pacientes"/>">
-			<div class="form-group">
-				<label>NOME</label>
-				<input name="nome" class="form-control">
-			</div>
-			
-			
-			<div class="form-group">
-				<label>NOMEMAE</label>
-				<input name="mae" class="form-control">
-			</div>
-			
-			<div class="form-group">
-				<label>CPF</label>
-				<input name="cpf" class="form-control">
-			</div>
-			
-			<div class="form-group">
-				<label>DATA DE NASCIMENTO(dd/mm/yyyy)</label>
-				<input name="dt_nascimento" class="form-control">
-			</div>
-			
-			<div class="form-group">
-				<label>TIPO(MUNICIPIE OU FUNCIONARIO)</label>
-				<input name="tipo" class="form-control">
-			</div>
-			
-			<input type="submit" value="Salvar" class="btn btn-primary mt-1">
-		</form>
+
 
 
 <h1 class="text-center">LISTA</h1>

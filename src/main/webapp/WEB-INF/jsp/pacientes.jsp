@@ -14,9 +14,9 @@
  <div style="text-align:center">
         <h1>Gerenciamento do Paciente</h1>
         <h2>
-            <a href="/novo">Adicionar novo Paciente</a>
+            <a href="./novo">Adicionar novo Paciente</a>
             &nbsp;&nbsp;&nbsp;
-            <a href="/listar">Listar todos os Pacientes</a>
+            <a href="./pacientes">Listar todos os Pacientes</a>
              
         </h2>
     </div>
@@ -28,26 +28,28 @@
 		<table class="table table-hover table-striped table-bordered">
 			<thead>
 				<tr>
+				<th>ID</th>
 					<th>NOME</th>
 					<th>NOMEMAE</th>
 					<th>CPF</th>
 					<th>DATA</th>
 					<th>TIPO</th>
-					<th>AÇÂO</th>
+					<th>AÇÃO</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${pacientes }" var="paciente">
 					<tr>
+						<td>${paciente.id} </td>
 						<td>${paciente.nome }</td>
 						<td>${paciente.mae }</td>
 						<td>${paciente.cpf }</td>
 						<td>${paciente.dt_nascimento }</td>
 						<td>${paciente.tipo }</td>
 						<td>
-                        <a href="/edit?id=<c:out value='${book.id}' />">Editar</a>
+                        <a href="./edit?id=<c:out value='${paciente.id}' />">Editar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/delete?id=<c:out value='${book.id}' />">Deletar</a>                     
+                        <a href="./delete?id=<c:out value='${paciente.id}' />">Deletar</a>                     
                     </td>
 					</tr>
 				</c:forEach>

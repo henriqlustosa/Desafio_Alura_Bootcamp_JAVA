@@ -44,7 +44,7 @@ public class PacienteDao {
 			List<Paciente> pacientes = new ArrayList<>();
 
 			while (rs.next()) {
-				Paciente paciente = new Paciente(rs.getString("nome"), rs.getString("mae"), rs.getString("cpf"),
+				Paciente paciente = new Paciente(rs.getInt("id"), rs.getString("nome"), rs.getString("mae"), rs.getString("cpf"),
 						rs.getDate("dt_nascimento").toLocalDate(), TipoPaciente.valueOf(rs.getString("tipo")));
 
 				pacientes.add(paciente);
@@ -120,7 +120,7 @@ public class PacienteDao {
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
-				paciente = new Paciente(resultSet.getString("nome"), resultSet.getString("mae"),
+				paciente = new Paciente( resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("mae"),
 						resultSet.getString("cpf"), resultSet.getDate("dt_nascimento").toLocalDate(),
 						TipoPaciente.valueOf(resultSet.getString("tipo")));
 

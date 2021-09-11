@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,27 +21,39 @@ import hospital.modelo.Paciente;
 import hospital.modelo.TipoPaciente;
 
 
+@WebServlet(
+        name = "HomeServlet",
+        description = "Homepage Servlet Configuration",
+        urlPatterns = {"/pacientes", "/novo","/insert", "/delete","/edit" , "/update"}
+)
+	
 public class ServletController extends HttpServlet {
 	
 	
 	
 	
 	/**
-	 * 
-	 */
+	
+	
+	 private static final Logger logger = 
+				Logger.getLogger(this.class.getName());
+				
+				 */ 	
 	private static final long serialVersionUID = 1L;
 	private PacienteDao dao;
 
-	public ServletController() {
+
+public ServletController() {
 		Connection conexao = new ConnectionFactory().getConnection();
 		this.dao = new PacienteDao(conexao);
 	}
-	
+	@Override
 	 protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
 	        doGet(request, response);
 	    }
-	 
+	
+	@Override
 	    protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
 	        String action = request.getServletPath();
@@ -97,9 +109,9 @@ public class ServletController extends HttpServlet {
 	    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, ServletException, IOException {
 	        int id = Integer.parseInt(request.getParameter("id"));
-	        Paciente existingBook = dao.getPaciente(id);
-	        RequestDispatcher dispatcher = request.getRequestDispatcher("pacienteForm.jsp");
-	        request.setAttribute("book", existingBook);
+	        Paciente existingPaciente = dao.getPaciente(id);
+	        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/pacienteForm.jsp");
+	        request.setAttribute("paciente", existingPaciente);
 	        dispatcher.forward(request, response);
 	 
 	    }
@@ -122,10 +134,11 @@ public class ServletController extends HttpServlet {
 	    
 	    private void updatePaciente(HttpServletRequest request, HttpServletResponse response)
 	            throws SQLException, IOException {
-	        int id = Integer.parseInt(request.getParameter("id"));
+	        
 	        String nome = request.getParameter("nome");
 			String mae = request.getParameter("mae");
 			String cpf = request.getParameter("cpf");
+			int id = Integer.parseInt(request.getParameter("id"));
 			
 			LocalDate dt_nascimento = LocalDate.parse(request.getParameter("dt_nascimento"), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 			TipoPaciente tipo = TipoPaciente.valueOf(request.getParameter("tipo"));

@@ -8,7 +8,7 @@
 <title>Hospital</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 </head>
 <body>
  <div style="text-align:center">
@@ -44,7 +44,10 @@
 						<td>${paciente.nome }</td>
 						<td>${paciente.mae }</td>
 						<td>${paciente.cpf }</td>
-						<td>${paciente.dt_nascimento }</td>
+						<td>
+						<fmt:parseDate value="${paciente.dt_nascimento}" pattern="yyyy-MM-dd" var="formatada" type="date" />
+<fmt:formatDate value="${formatada}" pattern="dd/MM/yyyy" type="date"/>
+						</td>
 						<td>${paciente.tipo }</td>
 						<td>
                         <a href="./edit?id=<c:out value='${paciente.id}' />">Editar</a>

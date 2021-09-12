@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Formulário do Paciente</title>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 </head>
 <body>
 	<div style="text-align: center">
@@ -18,55 +19,76 @@
 	</div>
 
 	<div class="container col-md-5">
-                <div class="card">
-                    <div class="card-body">
-                        <c:if test="${paciente != null}">
-                            <form action="update" method="post">
-                        </c:if>
-                        <c:if test="${paciente == null}">
-                            <form action="insert" method="post">
-                        </c:if>
+		<div class="card">
+			<div class="card-body">
+				<c:if test="${paciente != null}">
+					<form action="update" method="post">
+				</c:if>
+				<c:if test="${paciente == null}">
+					<form action="insert" method="post">
+				</c:if>
 
-                        <caption>
-                            <h2>
-                                <c:if test="${paciente != null}">
+				<caption>
+					<h2>
+						<c:if test="${paciente != null}">
                                     Editar Paciente
                                 </c:if>
-                                <c:if test="${paciente == null}">
+						<c:if test="${paciente == null}">
                                     Adicionar um novo Paciente
                                 </c:if>
-                            </h2>
-                        </caption>
+					</h2>
+				</caption>
 
-                       <c:if test="${paciente != null}">
-                            <input type="hidden" name="id" value="<c:out value='${paciente.id}' />" />
-                        </c:if> <!--
+				<c:if test="${paciente != null}">
+					<input type="hidden" name="id"
+						value="<c:out value='${paciente.id}' />" />
+				</c:if>
+				<!--
                                 <fieldset class="form-group">
                             <label>ID</label> <input type="text" value="<c:out value='${paciente.id}' />" class="form-control" name="id" required="required">
                         </fieldset>-->
 
-                         <fieldset class="form-group">
-                            <label>Nome</label> <input type="text" value="<c:out value='${paciente.nome}' />" class="form-control" name="nome" required="required">
-                        </fieldset>
+				<fieldset class="form-group">
+					<label>Nome: </label> <input type="text"
+						value="<c:out value='${paciente.nome}' />" class="form-control"
+						name="nome" required="required">
+				</fieldset>
 
-                        <fieldset class="form-group">
-                            <label>Mae</label> <input type="text" value="<c:out value='${paciente.mae}' />" class="form-control" name="mae">
-                        </fieldset>
+				<fieldset class="form-group">
+					<label> Nome da Mãe:</label> <input type="text"
+						value="<c:out value='${paciente.mae}' />" class="form-control"
+						name="mae">
+				</fieldset>
 
-                        <fieldset class="form-group">
-                            <label>CPF</label> <input type="text" value="<c:out value='${paciente.cpf}' />" class="form-control" name="cpf">
-                        </fieldset>
-   <fieldset class="form-group">
-                            <label>DATANASCIMENTO</label> <input type="text" value="<c:out value='${paciente.dt_nascimento}' />" class="form-control" name="dt_nascimento">
-                        </fieldset>
-						   <fieldset class="form-group">
-                            <label>TIPO</label> <input type="text" value="<c:out value='${paciente.tipo}' />" class="form-control" name="tipo">
-                        </fieldset>
-                        <button type="submit" class="btn btn-success">Save</button>>
-                       
-                    </div>
-                </div>
-            </div>
+				<fieldset class="form-group">
+					<label>CPF: </label> <input type="text"
+						value="<c:out value='${paciente.cpf}' />" class="form-control"
+						name="cpf">
+				</fieldset>
+				<fieldset class="form-group">
+					<label>Data de Nascimento: </label>
+
+
+					<fmt:parseDate value="${paciente.dt_nascimento}"
+						pattern="yyyy-MM-dd" var="formatada" type="date" />
+
+					<fmt:formatDate value="${formatada}" pattern="dd/MM/yyyy"
+						type="date" var="formattedDate" />
+					<input name="dt_nascimento" data-format="dd/MM/yyyy" type="text"
+						value="${formattedDate}" />
+
+
+				</fieldset>
+				<fieldset class="form-group">
+					<label>Tipo: </label> <input type="text"
+						value="<c:out value='${paciente.tipo}' />" class="form-control"
+						name="tipo">
+				</fieldset>
+				<button type="submit" class="btn btn-success">Save</button>
+				
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>
-  
